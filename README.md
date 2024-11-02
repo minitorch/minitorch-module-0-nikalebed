@@ -6,3 +6,13 @@
 * Docs: https://minitorch.github.io/
 
 * Overview: https://minitorch.github.io/module0/module0/
+
+## Hand-created classifier from ex 0.5
+
+<img src="graphics/0_5_vis.png">
+
+```
+weight_0_0 = -4.06
+weight_1_0 = 0.80
+bias_0 = 1.68 
+```
