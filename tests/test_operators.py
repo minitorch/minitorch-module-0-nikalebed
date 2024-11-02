@@ -109,9 +109,17 @@ def test_sigmoid(a: float) -> None:
     """
     assert 0.0 <= sigmoid(a) <= 1.0
     assert_close(1 - sigmoid(a), sigmoid(-a))
-    assert_close(sigmoid(0.), 0.5)
-    assert lt(sigmoid(a-1),  sigmoid(a)) or sigmoid(a-1) == 1. or sigmoid(a) == 0.
-    assert lt(sigmoid(a),  sigmoid(a+1)) or sigmoid(a) == 1.  or sigmoid(a+1) == 0.
+    assert_close(sigmoid(0.0), 0.5)
+    assert (
+        lt(sigmoid(a - 1), sigmoid(a))
+        or minitorch.operators.is_close(sigmoid(a - 1), 1)
+        or minitorch.operators.is_close(a, 0.0)
+    )
+    assert (
+        lt(sigmoid(a), sigmoid(a + 1))
+        or minitorch.operators.is_close(sigmoid(a), 1)
+        or minitorch.operators.is_close(a + 1, 0.0)
+    )
 
 
 @pytest.mark.task0_2
@@ -173,7 +181,10 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    assert_close(minitorch.operators.sum(ls1)+ minitorch.operators.sum(ls2), minitorch.operators.sum(ls1+ls2))
+    assert_close(
+        minitorch.operators.sum(ls1) + minitorch.operators.sum(ls2),
+        minitorch.operators.sum(ls1 + ls2),
+    )
 
 
 @pytest.mark.task0_3
